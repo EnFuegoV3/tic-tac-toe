@@ -28,45 +28,43 @@ const myGameBoard = (function() {
 
     const gameBoard = ["", "", "", "", "", "", "", "", ""];
     
-    const create = () => {
-        for(let i=0; i < gameBoard.length; i++) {
+    const xAmount = () => gameBoard.indexOf("X");
+    const oAmount = () => gameBoard.indexOf("O");
+    
+    for(let i=0; i < gameBoard.length; i++) {
         let div = document.createElement('div');
         div.setAttribute('id', [i])
         div.classList.add('squares')
         div.innerHTML = gameBoard[i];
         container.appendChild(div);
+    }
         
-        }
-        const squares = document.querySelectorAll('.squares');
-        squares.forEach(square => {
-            square.addEventListener('click', (e) => {
-                mark(e.target.id, player1.symbol)
+    const squares = document.querySelectorAll('.squares');
+
+    const player1 = () => {squares.forEach(square => {
+        square.addEventListener('click', (e) => {
+            gameBoard.splice(e.target.id, 1, player1.symbol)
+            console.log(gameBoard);
             })
         });
-    }
-    
+    };    
 
-
-    
-    const mark = (a, b) => {
-                gameBoard.splice(a, 1, b)
-                container.innerHTML = "";
-                create();
-                console.log(gameBoard);
-        
-    }
-
-    const click = () => {
-        
-    }
-    
+    const player2 = () => {squares.forEach(square => {
+        square.addEventListener('click', (e) => {
+            gameBoard.splice(e.target.id, 1, player2.symbol)
+            console.log(gameBoard);
+            })
+        });
+    };  
 
     return {
         gameBoard,
-        mark,
-        create,
         container,
-        
+        player1,
+        player2,
+        xAmount,
+        oAmount
+
     }
 
    
@@ -81,7 +79,11 @@ const myGameBoard = (function() {
 
 
 const displayController = (function () {
-    
+    if(myGameBoard.xAmount() === 0 && myGameBoard.oAmount() === 0){
+         myGameBoard.player1();
+    } else {myGameBoard.player2()}
+    // myGameBoard.player1();
+    // myGameBoard.player2();
     
 })();
 
@@ -92,5 +94,5 @@ const displayController = (function () {
 
 
 
-myGameBoard.create();
+// myGameBoard.create();
 
