@@ -30,20 +30,12 @@ h1 {
     border: 1px solid black;
 }
 
-.game-board > div {
+.squares {
     border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
-}
-
-.x {
     font-size: 7rem;
     
 }
 
-.o {
-    font-size: 7rem;
-}
